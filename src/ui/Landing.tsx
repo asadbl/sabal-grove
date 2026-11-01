@@ -48,7 +48,7 @@ const ESTATE_CAPTION: Record<string, string> = {
   gate: "The gatehouse off Harbor Boulevard",
   street: "Sabal Grove Lane, from the gate",
   skyline: "The Harbor skyline across Heron Lake",
-  aerial: "Sabal Grove from above",
+  aerial: "Sabal Grove between the fairway and Heron Lake",
 };
 function caption(url: string) {
   const f = url.split("/").pop()!.replace(/\.jpg$/, "");

@@ -142,7 +142,8 @@ async function generate(file) {
       const [, b64] = url.split(",");
       const raw = path.join(RAW, file.replace(/\.jpg$/, ".png"));
       fs.writeFileSync(raw, Buffer.from(b64, "base64"));
-      execFileSync("sips", ["-s", "format", "jpeg", "-s", "formatOptions", "84", "-Z", "1800", raw, "--out", path.join(OUT, file)], { stdio: "ignore" });
+      // About 150 KB a photo at 1800 px, light enough for an iPad on cellular (sips ignores its quality option).
+      execFileSync("ffmpeg", ["-loglevel", "error", "-y", "-i", raw, "-vf", "scale='min(1800,iw)':-2", "-q:v", "5", path.join(OUT, file)], { stdio: "ignore" });
       costs[file] = j.usage?.cost ?? null;
       console.log(`photo ${file}${j.usage?.cost != null ? `  $${j.usage.cost.toFixed(4)}` : ""}`);
       return;

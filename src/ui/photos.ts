@@ -52,8 +52,8 @@ export function useEstatePhotos() {
     if (!d) return [];
     const fronts = Object.entries(d.index).filter(([k]) => k !== "estate").map(([, f]) => f.find((x) => x.endsWith("-front.jpg"))).filter(Boolean) as string[];
     const estate = d.index.estate ?? [];
-    // Arrival first, then the homes, then the skyline over the water.
-    return [...estate.filter((f) => /gate|street/.test(f)), ...fronts, ...estate.filter((f) => /skyline/.test(f))].map(photoUrl);
+    // Arrival first, then the homes, then the whole street between the fairway and the lake.
+    return [...estate.filter((f) => /gate|street/.test(f)), ...fronts, ...estate.filter((f) => /aerial/.test(f))].map(photoUrl);
   }, [d]);
 }
 
