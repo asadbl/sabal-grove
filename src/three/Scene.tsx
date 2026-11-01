@@ -100,10 +100,19 @@ function Effects({ quality }: { quality: number }) {
 /** Dev-only: aim the orbit camera directly, for the photo source renders. */
 function DevView() {
   const controls = useThree((s) => s.controls) as unknown as { setLookAt: (...a: (number | boolean)[]) => void } | null;
+  const camera = useThree((s) => s.camera);
+  const size = useThree((s) => s.size);
   useEffect(() => {
     if (!import.meta.env.DEV || !controls) return;
-    Object.assign(window, { __view: (p: number[], t: number[]) => controls.setLookAt(p[0], p[1], p[2], t[0], t[1], t[2], false) });
-  }, [controls]);
+    Object.assign(window, {
+      __view: (p: number[], t: number[]) => controls.setLookAt(p[0], p[1], p[2], t[0], t[1], t[2], false),
+      // World point to CSS pixels on the canvas, for scripted demos.
+      __project: (x: number, y: number, z: number) => {
+        const v = new THREE.Vector3(x, y, z).project(camera);
+        return [(v.x + 1) / 2 * size.width, (1 - v.y) / 2 * size.height, v.z];
+      },
+    });
+  }, [controls, camera, size]);
   return null;
 }
 

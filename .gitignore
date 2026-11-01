@@ -25,3 +25,6 @@ dist-ssr
 
 # 3D source renders and the headless Chrome profile used to make the photos
 .photo-src
+
+# Reel work files and renders (scripts/reel)
+reel/
