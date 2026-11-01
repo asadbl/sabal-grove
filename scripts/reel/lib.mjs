@@ -126,7 +126,13 @@ export async function open({ out, width, height, dsf = 2, fps = 30, port = 9340,
       await run(`window.__finger(${f.x.toFixed(2)}, ${f.y.toFixed(2)}, ${JSON.stringify({ visible: f.visible, pressed: f.pressed, ripple })})`);
       await run(`window.__vt.step(${dt})`);
       if (record && n % every === 0) {
-        const { result } = await send("Page.captureScreenshot", { format: "jpeg", quality: 94 });
+        // A capture can fail while the page swaps its canvas; the clock is paused, so retrying gets the same frame.
+        let result;
+        for (let tries = 0; !result?.data; tries++) {
+          const m = await send("Page.captureScreenshot", { format: "jpeg", quality: 94 });
+          result = m.result;
+          if (!result?.data) { if (tries > 8) throw new Error("screenshot failed: " + JSON.stringify(m.error)); await sleep(300); }
+        }
         fs.writeFileSync(`${out}/${String(n).padStart(5, "0")}.jpg`, Buffer.from(result.data, "base64"));
       }
       n++;
@@ -162,6 +168,9 @@ export async function open({ out, width, height, dsf = 2, fps = 30, port = 9340,
       for (const p of points.slice(1)) await api.move(p[0], p[1], per, (t) => t);
       await api.wait(0.08); await api.up();
     },
+    // Run fn(t) before each frame for sec seconds, t running 0..1; for scripted scrolls the finger only mimes.
+    async each(sec, fn) { for (let i = 1, k = Math.max(1, Math.round(sec * fps)); i <= k; i++) { await fn(i / k); await api.frame(); } },
+    touch(on) { f.pressed = on; },
     async press(x, y, sec) { await api.move(x, y, 0.45); await api.down(); rippleAt = n; await api.wait(sec); await api.up(); },
     async wheel(deltaY, steps, sec) { const k = Math.round(sec * fps); for (let i = 0; i < k; i++) { if (i < steps) await api.mouse("mouseWheel", { deltaX: 0, deltaY: deltaY / steps }); await api.frame(); } },
     // Centre of the first visible element whose text matches.

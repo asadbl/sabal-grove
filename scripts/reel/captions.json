@@ -1,11 +1,18 @@
 [
  {"key": "landing", "eb": "Sabal Grove", "ln": "A real-estate site you can walk through"},
+ {"key": "homes", "eb": "Six villas", "ln": "Every home is different"},
+ {"key": "photos", "eb": "Photoreal", "ln": "Real photos of every home"},
+ {"key": "scroll", "eb": "One tap", "ln": "From the website into 3D"},
  {"key": "neighbourhood", "eb": "The neighbourhood", "ln": "Explore every street in 3D"},
+ {"key": "gate", "eb": "The tour", "ln": "Arrive through the gated entrance"},
+ {"key": "park", "eb": "The tour", "ln": "Past the park and its fountain"},
+ {"key": "lake", "eb": "The tour", "ln": "Homes and pools on Heron Lake"},
+ {"key": "pool", "eb": "Casa Palma", "ln": "Spin round to the 10 m pool"},
  {"key": "enter", "eb": "Go inside", "ln": "Tap a home to step in"},
  {"key": "lights", "eb": "Lights", "ln": "Switch on any room"},
  {"key": "rotate", "eb": "Any angle", "ln": "Turn the house around"},
  {"key": "plan", "eb": "Dimensions", "ln": "Every room and sofa, measured"},
  {"key": "walk", "eb": "Walk through", "ln": "Step inside at eye height"},
  {"key": "photo", "eb": "Photoreal", "ln": "See each room as a photo"},
- {"key": "door", "eb": "Doors", "ln": "Open the doors and walk on"}
+ {"key": "door", "eb": "Doors", "ln": "Slide the door open, out to the pool"}
 ]

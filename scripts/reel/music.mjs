@@ -1,8 +1,13 @@
 // Generates the reel's soundtrack with Lyria 3 through OpenRouter. The key is read from the project's .env.local and never printed.
 import fs from "node:fs";
 const KEY = fs.readFileSync(new URL("../../.env.local", import.meta.url), "utf8").match(/^OPENROUTER_API_KEY=(.+)$/m)[1].trim();
-const model = process.argv[2] ?? "google/lyria-3-pro-preview";
-const prompt = "Instrumental only, no vocals. A 50-second modern luxury real-estate promo track for an Instagram reel: warm, confident, polished deep house with soft felt-piano chords, airy pads, a tight clean kick from second 3, light shaker and a subtle riser into a lift around second 20, 118 BPM, major key, cinematic and premium, sunset Florida mood. Ends on a clean, resolved final chord with a short tail.";
+// Usage: node scripts/reel/music.mjs [seconds] [file]; writes reel/<file>, music.mp3 by default.
+const seconds = Number(process.argv[2] ?? 50), file = process.argv[3] ?? "music.mp3";
+const model = "google/lyria-3-pro-preview";
+const shape = seconds <= 20
+  ? "starts straight on the beat with no intro, one punchy lift at second 7"
+  : `a tight clean kick from second 3, light shaker, a subtle riser into a lift around second ${Math.round(seconds * 0.4)} and a second, fuller lift around second ${Math.round(seconds * 0.7)}`;
+const prompt = `Instrumental only, no vocals. A ${seconds}-second modern luxury real-estate promo track for an Instagram reel: warm, confident, polished deep house with soft felt-piano chords, airy pads, ${shape}, 118 BPM, major key, cinematic and premium, sunset Florida mood. Ends on a clean, resolved final chord with a short tail.`;
 const r = await fetch("https://openrouter.ai/api/v1/chat/completions", {
   method: "POST",
   headers: { Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" },
@@ -32,6 +37,6 @@ for await (const part of r.body) {
 }
 const bytes = Buffer.concat(chunks.map((c) => Buffer.from(c, "base64")));
 fs.mkdirSync(new URL("../../reel/", import.meta.url), { recursive: true });
-fs.writeFileSync(new URL("../../reel/music.mp3", import.meta.url), bytes);
+fs.writeFileSync(new URL(`../../reel/${file}`, import.meta.url), bytes);
 console.log("delta keys", [...keys].join(","), "audio bytes", bytes.length, "format", format, "cost", usage?.cost);
 console.log(text.slice(0, 400));

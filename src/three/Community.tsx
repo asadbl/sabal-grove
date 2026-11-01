@@ -8,6 +8,7 @@ import { COMMUNITY as C, LOTS, toWorld } from "../data/community";
 import { NOISE_GLSL } from "../lib/glsl";
 import { textures } from "../lib/materials";
 import { site, type WRect } from "../lib/site";
+import { isDrag } from "../lib/tap";
 import { useStore } from "../store";
 import { Vegetation, PLANT_INFO, type Plant } from "./Vegetation";
 
@@ -174,6 +175,7 @@ export function Community({ onPickObject }: { onPickObject: (o: { kind: string; 
   });
 
   const pickPlant = (e: ThreeEvent<MouseEvent>, p: Plant) => {
+    if (isDrag(e)) return;
     const info = PLANT_INFO[p.kind];
     const scale = p.kind === "hedge" ? 1 : p.s;
     const h = p.kind === "hedge" ? p.h ?? 1.8 : info.height * scale;
@@ -185,10 +187,12 @@ export function Community({ onPickObject }: { onPickObject: (o: { kind: string; 
   };
   const pickLamp = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
+    if (isDrag(e)) return;
     onPickObject({ kind: "lamp", label: "Street lantern", point: [e.point.x, e.point.y, e.point.z], specs: [["Height", fmt(4.5, units)], ["Spacing", fmt(36, units) + " each side"], ["Light", "3000 K LED, dusk to dawn"]] });
   };
   const pickStreet = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
+    if (isDrag(e)) return;
     onPickObject({ kind: "street", label: C.street, point: [e.point.x, e.point.y, e.point.z], specs: [["Carriageway", fmt(C.streetWidth, units)], ["Sidewalks", `${fmt(C.sidewalk, units)} each side`], ["Length", fmt(C.streetX1 - C.streetX0, units)], ["Turning circle", `${fmt(C.cul.r * 2, units)} across`]] });
   };
 

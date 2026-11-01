@@ -26,8 +26,9 @@ ws.addEventListener("message", (e) => { const m = JSON.parse(e.data); if (m.id &
 const send = (method, params = {}) => new Promise((r) => { const i = ++id; pend.set(i, r); ws.send(JSON.stringify({ id: i, method, params })); });
 await send("Emulation.setDeviceMetricsOverride", { width: 1080, height: 1920, deviceScaleFactor: 1, mobile: false });
 await send("Emulation.setDefaultBackgroundColorOverride", { color: { r: 0, g: 0, b: 0, a: 0 } });
-const CAPS = JSON.parse(fs.readFileSync(new URL("./captions.json", import.meta.url), "utf8"));
-const jobs = [["bg", {}], ["glass", {}], ["end", {}], ["mask", {}], ...CAPS.map((c, i) => [`cap${i}`, { mode: "cap", eb: c.eb, ln: c.ln }])];
+// Captions for the long reel and the 15-second cut, one PNG per caption key.
+const CAPS = ["captions.json", "cuts-15.json"].flatMap((f) => JSON.parse(fs.readFileSync(new URL(`./${f}`, import.meta.url), "utf8")));
+const jobs = [["bg", {}], ["glass", {}], ["end", {}], ["mask", {}], ...CAPS.map((c) => [`cap-${c.key}`, { mode: "cap", eb: c.eb, ln: c.ln }])];
 for (const [name, p] of jobs) {
   const qs = new URLSearchParams({ mode: p.mode ?? name, ...(p.eb ? { eb: p.eb, ln: p.ln } : {}) });
   await send("Page.navigate", { url: `file://${dir}assets.html?${qs}` });

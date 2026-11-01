@@ -4,6 +4,7 @@ import * as THREE from "three";
 import type { Lot } from "../data/community";
 import { LEVEL_HEIGHT } from "../data/types";
 import { villaMaterials, type VillaMats } from "../lib/materials";
+import { isDrag } from "../lib/tap";
 import { villaGeo, type DoorLeaf } from "../lib/villaGeo";
 import { useStore } from "../store";
 import { Furniture } from "./Furniture";
@@ -139,6 +140,7 @@ export const Villa = memo(function Villa({ lot, active, maxLevel, roof, ceilings
   const handle = (e: ThreeEvent<MouseEvent>) => {
     if (!onPick) return;
     e.stopPropagation();
+    if (isDrag(e)) return;
     let o: THREE.Object3D | null = e.object;
     let itemId: string | undefined, doorId: string | undefined;
     while (o && o !== group.current) {

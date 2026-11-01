@@ -1,0 +1,10 @@
+[
+ {"key": "s-landing", "from": "landing", "at": 0.6, "dur": 1.4, "eb": "Sabal Grove", "ln": "Real estate you can walk through"},
+ {"key": "s-photos", "from": "photos", "at": 3.0, "dur": 1.2, "eb": "Photoreal", "ln": "Every home, photographed"},
+ {"key": "s-neighbourhood", "from": "neighbourhood", "at": 2.0, "dur": 1.6, "eb": "In 3D", "ln": "The whole neighbourhood"},
+ {"key": "s-gate", "from": "gate", "at": 0.9, "dur": 1.2, "eb": "The tour", "ln": "In through the gate"},
+ {"key": "s-pool", "from": "pool", "at": 4.1, "dur": 1.6, "eb": "Pools", "ln": "Spin round to the pool"},
+ {"key": "s-lights", "from": "lights", "at": 1.0, "dur": 1.8, "eb": "Lights", "ln": "Switch on any room"},
+ {"key": "s-plan", "from": "plan", "at": 2.8, "dur": 1.4, "eb": "Sizes", "ln": "Every room measured"},
+ {"key": "s-door", "from": "door", "at": 0.7, "dur": 2.4, "eb": "Walk", "ln": "Step out to the pool"}
+]
