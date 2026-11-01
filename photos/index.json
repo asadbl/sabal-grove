@@ -1,0 +1,61 @@
+{
+ "casa-palma": [
+  "casa-palma-front.jpg",
+  "casa-palma-rear.jpg",
+  "casa-palma-aerial.jpg",
+  "casa-palma-living.jpg",
+  "casa-palma-kitchen.jpg",
+  "casa-palma-primary.jpg",
+  "casa-palma-bath.jpg"
+ ],
+ "villa-coral": [
+  "villa-coral-front.jpg",
+  "villa-coral-rear.jpg",
+  "villa-coral-aerial.jpg",
+  "villa-coral-living.jpg",
+  "villa-coral-kitchen.jpg",
+  "villa-coral-primary.jpg",
+  "villa-coral-bath.jpg"
+ ],
+ "the-cypress": [
+  "the-cypress-front.jpg",
+  "the-cypress-rear.jpg",
+  "the-cypress-aerial.jpg",
+  "the-cypress-living.jpg",
+  "the-cypress-kitchen.jpg",
+  "the-cypress-primary.jpg",
+  "the-cypress-bath.jpg"
+ ],
+ "villa-sable": [
+  "villa-sable-front.jpg",
+  "villa-sable-rear.jpg",
+  "villa-sable-aerial.jpg",
+  "villa-sable-living.jpg",
+  "villa-sable-kitchen.jpg",
+  "villa-sable-primary.jpg",
+  "villa-sable-bath.jpg"
+ ],
+ "heron-house": [
+  "heron-house-front.jpg",
+  "heron-house-rear.jpg",
+  "heron-house-aerial.jpg",
+  "heron-house-living.jpg",
+  "heron-house-kitchen.jpg",
+  "heron-house-primary.jpg",
+  "heron-house-bath.jpg"
+ ],
+ "villa-laguna": [
+  "villa-laguna-front.jpg",
+  "villa-laguna-rear.jpg",
+  "villa-laguna-aerial.jpg",
+  "villa-laguna-living.jpg",
+  "villa-laguna-kitchen.jpg",
+  "villa-laguna-primary.jpg",
+  "villa-laguna-bath.jpg"
+ ],
+ "estate": [
+  "estate-gate.jpg",
+  "estate-street.jpg",
+  "estate-aerial.jpg"
+ ]
+}
