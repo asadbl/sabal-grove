@@ -1,0 +1,55 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: "Young Serif"; src: url(young-serif-latin-400-normal.woff2) format("woff2"); }
+  @font-face { font-family: "Hanken"; src: url(hanken-grotesk-latin-wght-normal.woff2) format("woff2"); font-weight: 100 900; }
+  html, body { margin: 0; width: 1080px; height: 1920px; background: transparent; overflow: hidden; }
+  .layer { position: absolute; inset: 0; display: none; }
+  body[data-mode="bg"] #bg, body[data-mode="glass"] #glass, body[data-mode="mask"] #mask, body[data-mode="cap"] #cap, body[data-mode="end"] #end { display: block; }
+  /* iPad Pro 11 in portrait: screen 900x1288 at (90,320), 20px bezel */
+  .photo { position: absolute; inset: -80px; background: center/cover no-repeat; filter: blur(46px) saturate(1.15) brightness(.5); transform: scale(1.1); }
+  .tint { position: absolute; inset: 0; background: radial-gradient(120% 70% at 50% 45%, rgba(14,20,16,.15), rgba(10,14,12,.82) 75%), linear-gradient(180deg, rgba(10,14,12,.55), rgba(10,14,12,0) 22%, rgba(10,14,12,0) 70%, rgba(10,14,12,.7)); }
+  .shadow { position: absolute; left: 70px; top: 300px; width: 940px; height: 1328px; border-radius: 64px; box-shadow: 0 60px 120px -20px rgba(0,0,0,.75), 0 24px 50px -10px rgba(0,0,0,.55); }
+  .device { position: absolute; left: 70px; top: 300px; width: 940px; height: 1328px; border-radius: 64px;
+    background: linear-gradient(145deg, #3a3e41 0%, #1b1d1f 38%, #111214 62%, #2a2d30 100%);
+    box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.16), inset 0 0 0 4px #0b0c0d, inset 0 2px 2px rgba(255,255,255,.18); }
+  .screenhole { position: absolute; left: 20px; top: 20px; width: 900px; height: 1288px; border-radius: 44px; background: #000; }
+  .cam { position: absolute; left: 50%; top: 8px; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #3b4a5a, #0a0d10 70%); }
+  .brand { position: absolute; left: 0; right: 0; top: 1690px; text-align: center; font: 600 22px/1 Hanken; letter-spacing: .32em; color: rgba(246,242,234,.55); }
+  .glassfx { position: absolute; left: 90px; top: 320px; width: 900px; height: 1288px; border-radius: 44px;
+    background: linear-gradient(118deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.04) 26%, rgba(255,255,255,0) 27%, rgba(255,255,255,0) 100%); }
+  #mask { background: #000; }
+  #mask div { position: absolute; left: 0; top: 0; width: 900px; height: 1288px; border-radius: 44px; background: #fff; }
+  .cap { position: absolute; left: 60px; right: 60px; top: 76px; height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #f6f2ea; }
+  .eyebrow { font: 700 21px/1 Hanken; letter-spacing: .3em; color: #f2b04a; text-transform: uppercase; }
+  .line { margin-top: 18px; font: 400 60px/1.06 "Young Serif"; letter-spacing: -.01em; text-wrap: balance; text-shadow: 0 2px 20px rgba(0,0,0,.45); }
+  #end .name { position: absolute; left: 0; right: 0; top: 760px; text-align: center; font: 400 230px/1 "Young Serif"; letter-spacing: -.02em; color: #f6f2ea; text-shadow: 0 10px 50px rgba(0,0,0,.5); }
+  #end .rule { position: absolute; left: 50%; top: 1040px; width: 120px; height: 3px; margin-left: -60px; background: #f2b04a; border-radius: 2px; }
+  #end .sub { position: absolute; left: 0; right: 0; top: 1088px; text-align: center; font: 600 28px/1.5 Hanken; letter-spacing: .22em; color: rgba(246,242,234,.78); text-transform: uppercase; }
+  #end .tint2 { position: absolute; inset: 0; background: radial-gradient(90% 60% at 50% 48%, rgba(10,14,12,.35), rgba(10,14,12,.9)); }
+</style></head>
+<body>
+  <div id="bg" class="layer">
+    <div class="photo" style="background-image:url(villa-laguna-rear.jpg)"></div>
+    <div class="tint"></div>
+    <div class="shadow"></div>
+    <div class="device"><div class="screenhole"></div></div>
+    <div class="brand">SABAL GROVE · INTERACTIVE 3D</div>
+  </div>
+  <div id="glass" class="layer"><div class="glassfx"></div></div>
+  <div id="mask" class="layer"><div></div></div>
+  <div id="cap" class="layer"><div class="cap"><div class="eyebrow" id="eb"></div><div class="line" id="ln"></div></div></div>
+  <div id="end" class="layer">
+    <div class="photo" style="background-image:url(estate-aerial.jpg);filter:blur(30px) saturate(1.1) brightness(.55)"></div>
+    <div class="tint2"></div>
+    <div class="name">Asad</div>
+    <div class="rule"></div>
+    <div class="sub">Sabal Grove<br>Interactive 3D real estate</div>
+  </div>
+<script>
+  const q = new URLSearchParams(location.search);
+  document.body.dataset.mode = q.get("mode");
+  if (q.get("eb")) document.getElementById("eb").textContent = q.get("eb");
+  if (q.get("ln")) document.getElementById("ln").textContent = q.get("ln");
+</script>
+</body></html>

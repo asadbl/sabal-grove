@@ -27,4 +27,4 @@ dist-ssr
 .photo-src
 
 # Reel work files and renders (scripts/reel)
-reel/
+/reel/
